@@ -11,7 +11,7 @@ class Controller {
     }
     getFiles = async (req: Request, res: Response) => {
         const { filter = {} } = req.body
-        return res.send(model.getItems('file', filter))
+        return res.send(await model.getItems('file', filter))
     }
 
     getFile = async (req: Request, res: Response) => {
