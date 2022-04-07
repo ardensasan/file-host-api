@@ -11,7 +11,7 @@ class Controller {
     }
     getFiles = async (req: Request, res: Response) => {
         const { filter = {} } = req.body
-        return res.send(await model.getItems('file', filter))
+        return res.send(model.getItems('file', filter))
     }
 
     getFile = async (req: Request, res: Response) => {
@@ -28,7 +28,7 @@ class Controller {
 
     uploadFile = async (req: Request, res: Response) => {
         const { filesUploaded = [], user_id } = req.body
-        const data = filesUploaded.map(({ filename = '', mimetype = '', size = 0, url = '' }) => ({ user_id, filename, mimetype, size, url }))
+        const data = filesUploaded.map(({ filename = '', mimetype = '', size = 0, url = '', handle = '' }) => ({ user_id, filename, mimetype, size, url, handle }))
         model.insertItem('file', { type: 'UPLOAD_FILE', data })
     }
 }
