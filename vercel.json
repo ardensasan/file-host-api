@@ -15,7 +15,7 @@
           "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
           "Access-Control-Allow-Credentials": "true"
         },
-        "dest": "src/server.ts",
+        "dest": "server.ts",
         "continue": true
       }
     ]
