@@ -1,11 +1,11 @@
 import { MongoClient } from "mongodb";
-import dontenv from 'dotenv'
-dontenv.config()
+const uri =
+  "mongodb+srv://template:template@template.jzp0h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 let promise: any = null;
 export const dbConnect = () => {
   if (promise) return promise;
   promise = new Promise((resolve, reject) => {
-    const conn = new MongoClient(process.env.MONGO_DB_URI || '');
+    const conn = new MongoClient(uri);
     conn
       .connect()
       .then(() => {
