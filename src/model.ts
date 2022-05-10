@@ -1,3 +1,4 @@
+import axios from "axios";
 import { ObjectId } from "mongodb";
 import { dbConnect } from "./mongodb";
 class Model {
@@ -78,12 +79,12 @@ class Model {
         return response;
     };
 
-    deleteItem = async (collection: string, id: any) => {
+    deleteItem = async (collection: string, id: any, user_id: string, handle: string) => {
         const db = await dbConnect();
         const response = new Promise((resolve, reject) => {
             db.collection(collection).deleteOne(
-                { _id: new ObjectId(id) },
-                (err: any, res: any) => {
+                { _id: new ObjectId(id), user_id, handle },
+                async (err: any, res: any) => {
                     if (err) {
                         reject("ERROR");
                     }
@@ -91,9 +92,9 @@ class Model {
                 }
             );
         });
+        axios.delete(`${process.env.REACT_APP_FILESTACK_API}/${handle}?key=${process.env.REACT_APP_FILESTACK_API_KEY}&policy=${process.env.REACT_APP_FILESTACK_POLICY}&signature=${process.env.REACT_APP_FILESTACK_SIGNATURE}`)
         return response;
     };
-
 }
 
 export default Model

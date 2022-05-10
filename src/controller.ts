@@ -31,6 +31,11 @@ class Controller {
         const data = filesUploaded.map(({ filename = '', mimetype = '', size = 0, url = '', handle = '' }) => ({ user_id, filename, mimetype, size, url, handle }))
         model.insertItem('file', { type: 'UPLOAD_FILE', data })
     }
+
+    deleteFile = async (req: Request, res: Response) => {
+        const { params: { id = '' } = {}, body: { user_id = '', handle = '' } = {} } = req
+        return res.send(await model.deleteItem('file',id,user_id,handle))
+    }
 }
 
 export default Controller
